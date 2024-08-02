@@ -39,7 +39,7 @@ const getTest = async (req, res) => {
 // };
 
 
-exports.getTestbyId = async (req, res) => {
+const getTestbyId = async (req, res) => {
     try {
         const { testId } = req.query;
         if (!testId) return res.status(400).json({ msg: 'Test ID is required' });
