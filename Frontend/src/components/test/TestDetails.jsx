@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { USERENDPOINTS } from '../../constants/ApiConstants';
 import { mainContext } from "../../context/mainContex";
@@ -8,46 +8,45 @@ const TestDetail = () => {
     const useQuery = () => {
         return new URLSearchParams(useLocation().search);
     };
+
     const query = useQuery();
     const testId = query.get('testId');
 
- 
-    const { user,token } = useContext(mainContext);
+    const { user, token } = useContext(mainContext);
     const [test, setTest] = useState(null);
     const [answers, setAnswers] = useState({});
     const [alreadyCompleted, setAlreadyCompleted] = useState(false);
     const navigate = useNavigate();
 
-   
     useEffect(() => {
         const fetchTest = async () => {
             try {
                 const headers = {
-                    'Authorization': `Bearer ${token}`, // Include token or other headers if needed
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 };
-                const response = await axios.get("https://test-api-sable-two.vercel.app/api/user/getTestDetail ",{
-            headers,
-            params: {
-                testId // Send `id` as a query parameter
-            }
-        });
+                const response = await axios.get("https://test-api-sable-two.vercel.app/api/user/getTestDetail", {
+                    headers,
+                    params: {
+                        testId
+                    }
+                });
                 setTest(response.data);
             } catch (err) {
                 alert('Error fetching test details');
                 console.error('Error fetching test details:', err);
             }
-
         };
 
         const checkTestCompletion = async () => {
             try {
                 const headers = {
-                    'Authorization': `Bearer ${token}`, // Include token or other headers if needed
+                    'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json'
                 };
                 const response = await axios.get(USERENDPOINTS.CHECKTESTCOMPLETION, {
-                    params: { userId: user._id, testId: testId },headers
+                    params: { userId: user._id, testId },
+                    headers
                 });
                 if (response.data.completed) {
                     setAlreadyCompleted(true);
@@ -60,12 +59,12 @@ const TestDetail = () => {
             }
         };
 
-        if (user._id) {
+        if (user._id && testId) {
             checkTestCompletion();
         } else {
             navigate("/login");
         }
-    }, [testId , user._id, navigate]);
+    }, [testId, user._id, navigate, token]);
 
     const handleChange = (e) => {
         setAnswers({ ...answers, [e.target.name]: e.target.value });
@@ -88,14 +87,17 @@ const TestDetail = () => {
         });
 
         try {
-          
-
             await axios.post(USERENDPOINTS.SUBMITANSWERS, {
                 userId: user._id,
-                testId: testId ,
+                testId,
                 testName: test.title,
                 score
-            },);
+            }, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
             alert('Test submitted successfully.');
             navigate("/"); // Redirect to home after submission
         } catch (err) {
@@ -119,7 +121,7 @@ const TestDetail = () => {
     return (
         <div>
             <div className="relative mb-8">
-                <img 
+                <img
                     src="https://a.storyblok.com/f/120497/2400x1254/bb7255f9dc/testportal.png"
                     alt="Test Banner"
                     className="w-full h-[30vh] object-cover rounded-b-lg shadow-md"

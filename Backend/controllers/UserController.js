@@ -22,19 +22,35 @@ const getTest = async (req, res) => {
 
 
 
-const getTestbyId = async(req,res)=>{
+// const getTestbyId = async(req,res)=>{
    
     
+//     try {
+//         const { testId } = req.query;
+//         const test = await TestModel.findById(testId);
+//         if (!test) {
+//             return res.status(404).json({ error: 'Test not found' });
+//         }
+//         res.json(test);
+//     } catch (err) {
+//         console.error('Error fetching test details:', err.message);
+//         res.status(500).json({ error: 'Server error while fetching test details' });
+//     }
+// };
+
+
+exports.getTestDetail = async (req, res) => {
     try {
         const { testId } = req.query;
+        if (!testId) return res.status(400).json({ msg: 'Test ID is required' });
+
         const test = await TestModel.findById(testId);
-        if (!test) {
-            return res.status(404).json({ error: 'Test not found' });
-        }
+        if (!test) return res.status(404).json({ msg: 'Test not found' });
+
         res.json(test);
     } catch (err) {
-        console.error('Error fetching test details:', err.message);
-        res.status(500).json({ error: 'Server error while fetching test details' });
+        console.error(err);
+        res.status(500).json({ msg: 'Server error' });
     }
 };
 
