@@ -3,13 +3,18 @@ import axios from 'axios';
 import { USERENDPOINTS } from '../../constants/ApiConstants';
 import { mainContext } from '../../context/mainContex';
 import moment from 'moment'; // Import moment for date formatting
+import { useNavigate } from 'react-router-dom';
 
 const TestList = () => {
     const { token } = useContext(mainContext);
     const [tests, setTests] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const navigate = useNavigate();
 
+    const handleTestClick = (id) => {
+        navigate(`/testdetails?testId=${id}`);
+    };
     useEffect(() => {
         const fetchTests = async () => {
             try {

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Landingpage from '../pages/landingPage/LandingPage';
 import NotFound from '../pages/PageNotFound';
-import TestDetai from '../components/test/TestDetails';
+import TestDetail from '../components/test/TestDetails';
 import TestList from '../components/test/TestList';
 import { mainContext } from '../context/mainContex'; // Import context
 import PublishedResultsPage from '../pages/Result/PublishedResult';
@@ -18,7 +18,7 @@ const AppRoutes = () => {
       {user.role && (
         <>
           <Route path="/test" element={<TestList />} />
-          <Route path="/testdetails" element={<TestDetai />} />
+          <Route path="/testdetails" element={<TestDetail />} />
           <Route path="/showresult" element={<PublishedResultsPage />} />
         </>
       )}
