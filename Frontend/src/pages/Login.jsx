@@ -19,112 +19,91 @@ export default function Login() {
     try {
       const response = await axios.post(`${API_BASE_URL}auth/login`, { email, password });
       const { token, user } = response.data;
-      
+
       // Save token and user to localStorage
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-      
+
       // Update context with token
       setToken(token);
-  
-     
-        navigate('/'); // Redirect regular users to the home page
-   
+
+      navigate('/'); // Redirect regular users to the home page
+
     } catch (error) {
       setError(error.response?.data?.msg || 'An error occurred');
       console.log(error);
     }
   };
-  
 
   return (
-    <div className="flex flex-col md:flex-row min-h-screen">
-      {/* Login Form Section */}
+    <div
+      className="relative flex items-center justify-center min-h-screen bg-cover bg-center"
+      style={{
+        backgroundImage: `url('https://i.pinimg.com/736x/11/d5/95/11d5953e68e6e41f024164d26c319e32.jpg')`
+      }}
+    >
+      {/* Overlay for better text contrast */}
+      <div className="absolute inset-0 bg-black bg-opacity-50"></div>
+
       <motion.div
-        className="flex-1 flex items-center justify-center bg-gradient-to-r from-slate-500 to-yellow-700 text-white p-4 md:p-8"
-        style={{ flexBasis: '40%' }} // Increased width for login section
+        className="relative z-10 w-full max-w-md p-8 bg-white rounded-lg shadow-lg border border-gray-300"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
       >
-        <div className="w-full  max-w-md bg-black p-4 rounded-lg bg-opacity-30 shadow-lg">
-          <h1 className="text-3xl text-center text-white-800 mb-4">LOGIN</h1>
-          <p className='text-center p-4 mb-4'>Welcome back..!</p>
-          {error && <div className="text-red-500 text-center mb-4">{error}</div>}
-          <form onSubmit={handleSubmit}>
-            <div className="mb-4">
-              <input
-                className="w-full px-4 py-2 border border-gray-300 bg-slate-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                placeholder="Enter email.."
-                required
-              />
-            </div>
-            <div className="mb-6">
-              <input
-                className="w-full px-4 py-2 border border-gray-300 bg-slate-900 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder="Enter password..."
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="w-full bg-purple-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300"
-            >
-              LOGIN
-            </button>
-          </form>
-          <div className="mt-4 text-center">
-            <span className="text-white">Don't have an account? </span>
-            <Link to="/register" className="text-blue-500 hover:underline">
-              Register here
-            </Link>
+        <h1 className="text-3xl font-bold text-center text-gray-800 mb-4">Login</h1>
+        <p className="text-center text-gray-600 mb-6">Welcome back! Please log in to your account.</p>
+        {error && <div className="text-red-500 text-center mb-4">{error}</div>}
+        <form onSubmit={handleSubmit}>
+          <div className="mb-4">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
+            <input
+              id="email"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
           </div>
+          <div className="mb-6">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-1">Password</label>
+            <input
+              id="password"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 transition duration-300"
+          >
+            Log In
+          </button>
+        </form>
+        <div className="mt-6 text-center">
+          <span className="text-gray-700">Don't have an account? </span>
+          <Link to="/register" className="text-blue-500 hover:underline">Register here</Link>
         </div>
       </motion.div>
 
-      {/* Additional Content Section with Background Image */}
+      {/* Additional Content Section (Optional) */}
       <motion.div
-        className="flex-1 flex items-center justify-center"
-        style={{
-          flexBasis: '60%', // Adjusted width to match the login section increase
-          backgroundImage: `url('https://i.pinimg.com/736x/11/d5/95/11d5953e68e6e41f024164d26c319e32.jpg')`, // Replace with your image URL
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-        }}
+        className="absolute bottom-0 left-0 right-0 text-center p-8 bg-black bg-opacity-60 text-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1 }}
       >
-       
-
-       
-       <motion.div
-      className="w-full max-w-3xl p-8 bg-transparent-to-r from-gray-800 to-black rounded-lg text-center  mx-auto"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.8 }}
-    >
-       <AnimateName>
-      <h2 className="text-4xl md:text-5xl font-extrabold  text-balck mb-6 leading-tight tracking-tight">
-        Welcome
-      </h2>
-      </AnimateName>
-      <p className="mb-4 text-lg md:text-xl leading-relaxed">
-        Prepare for success with our comprehensive test-taking platform. Whether you're preparing for exams or seeking to improve your skills, our portal offers a wide range of tests and practice materials to help you excel.
-      </p>
-      <p className="mb-4 text-lg text-balck md:text-xl leading-relaxed">
-        Join For Test
-      </p>
-      <p className="mb-4 text-lg text-balck md:text-xl leading-relaxed">
-      Join.!   </p>
-    </motion.div>
-    
+        <AnimateName>
+          <h2 className="text-4xl font-extrabold mb-2 leading-tight">Welcome</h2>
+        </AnimateName>
+        <p className="text-sm mb-4">Prepare for success with our comprehensive test-taking platform. Whether you're preparing for exams or seeking to improve your skills, our portal offers a wide range of tests and practice materials to help you excel.</p>
+        <p className="text-sm">Join us for a test-taking experience like no other.</p>
       </motion.div>
     </div>
   );

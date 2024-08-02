@@ -4,6 +4,7 @@ const jwt= require("jsonwebtoken")
 const dotenv= require("dotenv")
 
 dotenv.config();
+let JWT_SECRET="thisismy-secret-code"
 
 
 const register = async(req,res)=>{
@@ -55,7 +56,7 @@ const login = async (req, res) => {
     // Generate the JWT token
     const token = jwt.sign(
       { id: user._id, role: user.role },
-      process.env.JWT_SECRET,
+      JWT_SECRET,
       { expiresIn: '1h' }
     );
     console.log('Token generated:', token);

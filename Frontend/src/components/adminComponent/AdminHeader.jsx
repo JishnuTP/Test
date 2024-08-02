@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Menu, MenuItem, IconButton, Typography, Avatar, Divider } from "@mui/material";
 import { Link } from "react-router-dom";
 import { Logout as LogOutIcon, Notifications as NotificationsIcon } from "@mui/icons-material";
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import Sidebar from "./Sidebar";
+import { mainContext } from "../../context/mainContex";
 
 const AdminHeader = () => {
+  const {signOut}= useContext(mainContext)
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
+  };
+  const handleSignOut = () => {
+    signOut();
+    navigate("/");
   };
 
   const handleMenuClose = () => {
@@ -22,7 +28,7 @@ const AdminHeader = () => {
       <Sidebar />
         </div>
      
-      <Typography variant="h5" component="h1" className="text-xl font-bold text-black md:text-2xl">
+      <Typography variant="h5" component="h1" className="text-xl font-bold text-white md:text-2xl">
        Test Admin Portal
       </Typography>
       <div className="flex items-center gap-2 md:gap-4">
@@ -55,7 +61,7 @@ const AdminHeader = () => {
             </Link>
           </MenuItem>
           <Divider />
-          <MenuItem onClick={handleMenuClose}>
+          <MenuItem onClick={handleSignOut}>
             <LogOutIcon fontSize="small" sx={{ marginRight: 1 }} /> Logout
           </MenuItem>
         </Menu>

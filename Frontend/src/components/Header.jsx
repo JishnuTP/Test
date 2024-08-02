@@ -37,7 +37,8 @@ const Header = () => {
       <div className="flex items-center justify-between">
         <Link to="/" className="flex items-center">
           <img
-            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDYGUrblz2z111vSt6ys96d97hXVrvYfLY1Q&s"
+           src="https://a.storyblok.com/f/120497/2400x1254/bb7255f9dc/testportal.png" // Replace with your image URL
+          
             alt="Test Logo"
             className="h-15 w-20"
           />
@@ -68,6 +69,8 @@ const Header = () => {
           
           {/* Additional links for logged-in users */}
           {isLoggedIn && (
+            <>
+          
             <Link
               to="/test"
               className="relative flex items-center text-white hover:text-blue-300 transition-colors duration-300"
@@ -77,6 +80,14 @@ const Header = () => {
               Test
               <span className="absolute bottom-0 left-0 w-0 h-1 bg-white transition-all duration-300"></span>
             </Link>
+            <Link
+            to="/showresult"
+            className="block py-2 font-medium text-white hover:bg-gray-700 transition-colors duration-300"
+            onClick={() => setIsMenuOpen(false)}
+          >
+            Result
+          </Link>
+          </>
           )}
         </nav>
       </div>
@@ -96,11 +107,14 @@ const Header = () => {
               >
                 Home
               </Link>
+
+             
               
               
              
               {/* Additional links for logged-in users in mobile menu */}
               {isLoggedIn && (
+                <>
                 <Link
                   to="/test"
                   className="block py-2 font-medium text-white hover:bg-gray-700 transition-colors duration-300"
@@ -108,6 +122,15 @@ const Header = () => {
                 >
                   Test
                 </Link>
+                <Link
+                to="/showresult"
+                className="block py-2 font-medium text-white hover:bg-gray-700 transition-colors duration-300"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Result
+              </Link>
+              </>
+                
               )}
             </div>
           </div>

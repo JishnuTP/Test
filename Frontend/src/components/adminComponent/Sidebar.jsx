@@ -82,13 +82,10 @@ const Sidebar = () => {
               <ListItemIcon><FilesIcon /></ListItemIcon>
               <ListItemText primary="test" />
             </ListItem>
-            <ListItem button onClick={() => handleLinkClick("/admin/questions")}>
-              <ListItemIcon><FilesIcon /></ListItemIcon>
-              <ListItemText primary="Questions" />
-            </ListItem>
-            <ListItem button onClick={() => handleLinkClick("/admin/settings")}>
+           
+            <ListItem button onClick={() => handleLinkClick("/admin/resultlist")}>
               <ListItemIcon><SettingsIcon /></ListItemIcon>
-              <ListItemText primary="Settings" />
+              <ListItemText primary="ResultList" />
             </ListItem>
             <ListItem button onClick={() => handleLinkClick("/admin/users")}>
               <ListItemIcon><UsersIcon /></ListItemIcon>
