@@ -5,7 +5,8 @@ https://github.com/JishnuTP/Test.git
 
 clone the link.
 
-Menu list - 
+test portal
+
 front-end---- side in use vite , react.js and tailwind.css and mui
 backend - node.js , express , mongoDB ,JWT
 
@@ -19,6 +20,10 @@ to start frontend -  npm i --- to  install node modules and then "npm run dev".
 to start backend -  npm i --- to  install node modules and then "node index.js". (or nodemon index.js)
 
 
+
+
+instruction to use
+
 after start front end it navigate to a landing page with button go to .
 
 navigate - login/registration 
@@ -31,5 +36,5 @@ there are two type of user login  1- user
 
 when user login its redirect to same page with logged credentials and some option like start test and result option appears and admin can have option to add test and publish result .
 
-when admin publish result its shows in result section.
+when admin publish result its shows in result section of user.
  
