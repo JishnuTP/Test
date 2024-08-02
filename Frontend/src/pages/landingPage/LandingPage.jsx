@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
+import TestList from "../../components/test/TestList";
+import ResultList from "../../components/result/Result";
 
 
 const Landingpage = () => {
@@ -63,19 +65,28 @@ const Landingpage = () => {
                 Get Started
               </button>
               </Link>
+
+              <Link
+              to="/test">
+            
               <button
                 onClick={scrollToSection}
                 className="inline-flex items-center rounded-md border border-white bg-transparent px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-white hover:text-primary focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2"
               >
                Start Test
               </button>
+              </Link>
             </div>
           </div>
         </section>
 
         <div ref={servicesRef} className="px-4 md:px-8 lg:px-8">
-         test take
+        <ResultList/>
         </div>
+
+   
+       
+       
       </main>
 
      

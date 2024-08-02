@@ -5,6 +5,7 @@ import { mainContext } from '../context/mainContex';
 import Users from '../pages/list/UserList';
 import Userprofile from '../pages/Userprofile';
 import PageInProgres from '../pages/Progress';
+import AdminAddTest from '../pages/admin/AddTest';
 
 const AdminRoutes = () => {
 
@@ -14,6 +15,7 @@ const AdminRoutes = () => {
       
       <Route path="/users" element={<Users />} />
       <Route path="/my-account" element={<Userprofile />} />
+      <Route path="/test" element={<AdminAddTest />} />
      
       {/* Catch all unmatched routes */}
       <Route path="*" element={<PageInProgres />} />
