@@ -26,7 +26,8 @@ const getTestbyId = async(req,res)=>{
    
     
     try {
-        const test = await TestModel.findById(req.query);
+        const { testId } = req.query;
+        const test = await TestModel.findById(testId);
         if (!test) {
             return res.status(404).json({ error: 'Test not found' });
         }
