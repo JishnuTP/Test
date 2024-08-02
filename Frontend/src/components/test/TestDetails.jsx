@@ -1,11 +1,17 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { USERENDPOINTS } from '../../constants/ApiConstants';
 import { mainContext } from "../../context/mainContex";
 
 const TestDetail = () => {
-    const { id } = useParams();
+    const useQuery = () => {
+        return new URLSearchParams(useLocation().search);
+    };
+    const query = useQuery();
+    const testId = query.get('testId');
+
+ 
     const { user,token } = useContext(mainContext);
     const [test, setTest] = useState(null);
     const [answers, setAnswers] = useState({});
@@ -23,7 +29,7 @@ const TestDetail = () => {
                 const response = await axios.get("https://test-api-sable-two.vercel.app/api/user/getTestDetail/ ",{
             headers,
             params: {
-                id: id // Send `id` as a query parameter
+                testId // Send `id` as a query parameter
             }
         });
                 setTest(response.data);
@@ -41,7 +47,7 @@ const TestDetail = () => {
                     'Content-Type': 'application/json'
                 };
                 const response = await axios.get(USERENDPOINTS.CHECKTESTCOMPLETION, {
-                    params: { userId: user._id, testId: id },headers
+                    params: { userId: user._id, testId: testId },headers
                 });
                 if (response.data.completed) {
                     setAlreadyCompleted(true);
@@ -59,7 +65,7 @@ const TestDetail = () => {
         } else {
             navigate("/login");
         }
-    }, [id, user._id, navigate]);
+    }, [testId , user._id, navigate]);
 
     const handleChange = (e) => {
         setAnswers({ ...answers, [e.target.name]: e.target.value });
@@ -86,7 +92,7 @@ const TestDetail = () => {
 
             await axios.post(USERENDPOINTS.SUBMITANSWERS, {
                 userId: user._id,
-                testId: id,
+                testId: testId ,
                 testName: test.title,
                 score
             },);
