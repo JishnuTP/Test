@@ -14,6 +14,19 @@ app.use(express.json());
 app.use(cors())
 app.use(express.urlencoded({ extended: true }));
 
+app.use(cors({
+    origin: "https://task-menucard-frontend.vercel.app", // Allow only this origin
+    methods: ["GET", "POST", "PUT", "DELETE"], // Allow these HTTP methods
+    credentials: true // Allow credentials if needed
+  }));
+
+  app.use(express.json());
+
+// Test route
+app.get("/", (req, res) => {
+    res.json("hello");
+});
+app.options('*', cors());
 
 app.use("/api/auth",authRoute)
 app.use("/api/admin",adminRoute)
