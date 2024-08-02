@@ -15,7 +15,7 @@ const TestDetail = () => {
     useEffect(() => {
         const fetchTest = async () => {
             try {
-                const response = await axios.get(`${USERENDPOINTS.GETTEST}/${id}`);
+                const response = await axios.get(`https://test-api-sable-two.vercel.app/api/user/getTest/${id}`);
                 setTest(response.data);
             } catch (err) {
                 alert('Error fetching test details');
