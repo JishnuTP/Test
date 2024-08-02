@@ -63,7 +63,7 @@ const TestList = () => {
                         {tests.map(test => (
                             <li key={test._id} className="bg-gray-50 border border-gray-300 rounded-lg p-4 shadow-sm hover:shadow-lg transition-shadow duration-300">
                                 <a 
-                                    href={`/test/${test._id}`}
+                                    href={`/testdetails/${test._id}`}
                                     className="block text-lg font-medium text-blue-600 hover:text-blue-800"
                                 >
                                     {test.title}

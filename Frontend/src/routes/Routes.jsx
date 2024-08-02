@@ -18,7 +18,7 @@ const AppRoutes = () => {
       {user.role && (
         <>
           <Route path="/test" element={<TestList />} />
-          <Route path="/test/:id" element={<TestDetai />} />
+          <Route path="/testdetails" element={<TestDetai />} />
           <Route path="/showresult" element={<PublishedResultsPage />} />
         </>
       )}

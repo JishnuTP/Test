@@ -19,7 +19,12 @@ const TestDetail = () => {
                     'Authorization': `Bearer ${token}`, // Include token or other headers if needed
                     'Content-Type': 'application/json'
                 };
-                const response = await axios.get(`https://test-api-sable-two.vercel.app/api/user/getTestDetail/${id}`,{headers});
+                const response = await axios.get("https://test-api-sable-two.vercel.app/api/user/getTestDetail/ ",{
+            headers,
+            params: {
+                id: id // Send `id` as a query parameter
+            }
+        });
                 setTest(response.data);
             } catch (err) {
                 alert('Error fetching test details');
